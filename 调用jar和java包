@@ -7,3 +7,9 @@ https://www.cnblogs.com/tangsong41/p/12586320.html
 https://www.cnblogs.com/lgs-tech/p/17847210.html
 
 查看日志，点击右上角感叹号，可以看到日志
+
+
+创建一个jar application项目 pom文件中引入maven项目依赖
+lib文件夹中放入jar文件
+idea jar包调试找到目录com.开头的文件夹就是包文件夹
+然后在自己创建一个java类demo代码放入main下
