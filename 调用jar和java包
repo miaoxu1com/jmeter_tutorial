@@ -6,6 +6,10 @@ https://blog.csdn.net/weixin_45213315/article/details/138125163
 https://www.cnblogs.com/tangsong41/p/12586320.html
 https://www.cnblogs.com/lgs-tech/p/17847210.html
 
+jmeter勾选自动重定向请求时如果重定向，就会在结果树中少一个请求
+保持连接 减少线程开销
+跟踪重定向
+
 前置和后置 取样器调用区别
 https://www.cnblogs.com/Lily-Li/p/16859752.html
 
