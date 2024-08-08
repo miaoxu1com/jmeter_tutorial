@@ -1,0 +1,9 @@
+参考文章
+https://blog.csdn.net/weixin_44904239/article/details/135091284
+少了一个分号，beanshell脚本必须用分号结尾
+https://blog.csdn.net/weixin_45213315/article/details/138125163
+可以调用多个jar包，调用第三方jar包放入apache-jmeter-5.6.3\lib\ext 库文件夹下即可，然后按需导入调用
+https://www.cnblogs.com/tangsong41/p/12586320.html
+https://www.cnblogs.com/lgs-tech/p/17847210.html
+
+查看日志，点击右上角感叹号，可以看到日志
