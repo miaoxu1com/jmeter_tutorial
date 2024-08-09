@@ -36,6 +36,7 @@ JD-GUI不需要安装，直接点击运行，可以反编译jar，class文件。
 
 idea常用jar包
 https://www.cnblogs.com/stars-one/p/11930390.html
+https://blog.csdn.net/qq_48299903/article/details/120231242
 
 jar分析用jadx支持智能跳转，全部保存伪代码导出的就是源码
 jd-gui它可以动态地打开.class文件或.jar文件并直接显示反编译后Java源代码。
