@@ -44,3 +44,6 @@ jd-gui它可以动态地打开.class文件或.jar文件并直接显示反编译�
 apk加固特征，逆向脱壳
 https://blog.csdn.net/weixin_44032232/article/details/109556934
 
+pycryptodome支持aes和rsa签名
+https://pythonmania.org/cryptography-vs-pycryptodome/
+
