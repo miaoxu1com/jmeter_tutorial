@@ -19,4 +19,4 @@ https://www.cnblogs.com/Lily-Li/p/16859752.html
 创建一个jar application项目 pom文件中引入maven项目依赖
 lib文件夹中放入jar文件
 idea jar包调试找到目录com.开头的文件夹就是包文件夹
-然后在自己创建一个java类demo代码放入main下
+然后在自己创建一个java类demo代码放入main下,创建main是为了方便调试jar包
