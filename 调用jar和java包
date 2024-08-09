@@ -20,3 +20,26 @@ https://www.cnblogs.com/Lily-Li/p/16859752.html
 lib文件夹中放入jar文件
 idea jar包调试找到目录com.开头的文件夹就是包文件夹
 然后在自己创建一个java类demo代码放入main下,创建main是为了方便调试jar包
+
+idea插件市场安装插件JarEditor后，可以在.class反编译文件中看到一个切换到Jar Editor的tab页 可以直接编辑原jar  这样就可以在原有jar包上二次修改满足自己的需求，不需要再反编译重新 编写一遍逻辑
+
+
+jar反编译比对
+https://www.crifan.org/java_decompiler_comparison_jd_gui_cfr_procyon_jadx/
+JD-GUI参考
+https://blog.csdn.net/chenchunlin526/article/details/78259682
+JD-IntelliJ属于Java Decompiler项目（JD项目）下个Intellij插件化的运行方式的反编译插件
+JD-GUI是属于Java Decompiler项目（JD项目）下个的图形化运行方式的反编译器。
+JD-GUI 是一个用 C++ 开发的 Java 反编译工具，由 Pavel Kouznetsov开发，支持Windows、Linux和苹果Mac Os三个平台。
+而且提供了Eclipse平台下的插件JD-Eclipse，Intellij平台下的插件JD-Intellij。
+JD-GUI不需要安装，直接点击运行，可以反编译jar，class文件。
+
+idea常用jar包
+https://www.cnblogs.com/stars-one/p/11930390.html
+
+jar分析用jadx支持智能跳转，但是不支持导出java代码
+jd-gui它可以动态地打开.class文件或.jar文件并直接显示反编译后Java源代码。
+
+apk加固特征，逆向脱壳
+https://blog.csdn.net/weixin_44032232/article/details/109556934
+
