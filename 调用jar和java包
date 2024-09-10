@@ -6,6 +6,59 @@ https://blog.csdn.net/weixin_45213315/article/details/138125163
 https://www.cnblogs.com/tangsong41/p/12586320.html
 https://www.cnblogs.com/lgs-tech/p/17847210.html
 
+jmeter中的扳手在压测中是新起一个线程去操作的，所以用beanshell 调用外部代码/外部脚本比较合适，beanshell不起新线程
+beanshell
+
+import java.util.UUID;
+import org.apache.commons.codec.digest.DigestUtils;
+import com.alibaba.fastjson.JSONObject;
+import java.util.Calendar;
+import AesUtil;
+import RsaUtil;
+import SignUtil;
+
+import 包名.类名
+#  必须要以;结尾负责报错
+Calendar cal = Calendar.getInstance();
+Long daytime = cal.getTimeInMillis();
+timestamp = String.valueOf(daytime);
+Request request = new Request();
+EncRequest encRequest = new EncRequest();
+request.setOutId(UUID.randomUUID().toString().replace("-", ""));
+String phoneNoMd5 = DigestUtils.md5Hex("15573756155");
+String servicePublicKey = "";
+String ownPrivateKey = "";
+String appId="";
+String version="1.0";
+JSONObject jsonObject = new JSONObject();
+jsonObject.put("phoneNoMd5", phoneNoMd5);
+request.setBizContent(jsonObject.toJSONString());
+encRequest.setAppId(appId);
+encRequest.setVersion(version);
+encRequest.setTimestamp(daytime);
+encRequest.setOutId(request.getOutId());
+String outid = request.getOutId();
+String reqIv = AesUtil.genIv();
+String reqSecretKey = AesUtil.genKey();
+String encReqIv = RsaUtil.encrypt(reqIv, servicePublicKey);
+String encReqSecretKey = RsaUtil.encrypt(reqSecretKey, servicePublicKey);
+encRequest.setReqIv(encReqIv);
+encRequest.setReqSecretKey(encReqSecretKey);
+String encBizContent = AesUtil.encryptByCBC(request.getBizContent(), reqSecretKey, reqIv);
+encRequest.setBizContent(encBizContent);
+String signStr = SignUtil.getSignStr(BeanUtil.beanToMap(encRequest));
+String sign = SignUtil.sign(signStr, ownPrivateKey);
+log.info(timestamp);
+vars.put("phone",phoneNoMd5);
+vars.put("outId",outid);
+vars.put("timestamp",timestamp);
+vars.put("reqSecretKey",encReqSecretKey);
+vars.put("reqIv",encReqIv);
+vars.put("sign",sign);
+vars.put("bizContent",encBizContent);
+
+
+
 jmeter勾选自动重定向请求时如果重定向，就会在结果树中少一个请求
 保持连接 减少线程开销
 跟踪重定向
