@@ -6,6 +6,8 @@ https://blog.csdn.net/weixin_45213315/article/details/138125163
 https://www.cnblogs.com/tangsong41/p/12586320.html
 https://www.cnblogs.com/lgs-tech/p/17847210.html
 
+jmeter中正则一次只能提取一个值保存，提取多个需要多个提取器
+
 jmeter中的扳手在压测中是新起一个线程去操作的，所以用beanshell 调用外部代码/外部脚本比较合适，beanshell不起新线程
 beanshell
 
