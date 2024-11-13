@@ -1,0 +1,69 @@
+import com.qihoo.finance.jkyun.sdk.security.domain.JkYunRequest;
+import java.util.UUID;
+import org.apache.commons.codec.digest.DigestUtils;
+import com.alibaba.fastjson.JSON;
+import java.util.Calendar;
+import com.qihoo.finance.jkyun.sdk.security.util.JkYunAesUtil;
+import com.qihoo.finance.jkyun.sdk.security.util.JkYunRsaUtil;
+import com.qihoo.finance.jkyun.sdk.security.util.JkYunSignUtil;
+import com.qihoo.finance.jkyun.sdk.security.domain.EncRequest;
+import com.qihoo.finance.jkyun.sdk.security.util.BeanUtil;
+import com.qihoo.finance.jkyun.sdk.security.domain.demo.ScoreQueryInputVO;
+import com.qihoo.finance.jkyun.sdk.security.domain.demo.DataItem;
+import java.util.ArrayList;
+
+Calendar cal = Calendar.getInstance();
+Long daytime = cal.getTimeInMillis();
+timestamp = String.valueOf(daytime);
+
+JkYunRequest request = new JkYunRequest();
+EncRequest encRequest = new EncRequest();
+request.setOutId(UUID.randomUUID().toString().replace("-", ""));
+
+String servicePublicKey = "12";
+String ownPrivateKey ="2";
+String appId="1";
+String version="1.0";
+String phoneNoMd5 = vars.get("phone");;
+String nameIdMd5 = vars.get("nameid");;
+String idNoMd5 = vars.get("idno");;
+String ChannelId = vars.get("channelid");
+DataItem idNoItem = (new DataItem()).setType("ID_MD5").setValue(idNoMd5);
+DataItem nameIdMd5Item = (new DataItem()).setType("NAME_ID_MD5").setValue(nameIdMd5);
+DataItem phoneNoMd5Item = (new DataItem()).setType("PHONE_MD5").setValue(phoneNoMd5);
+List dataItemList = new ArrayList();
+dataItemList.add(idNoItem);
+dataItemList.add(nameIdMd5Item);
+dataItemList.add(phoneNoMd5Item);
+ScoreQueryInputVO inputVO = new ScoreQueryInputVO();
+inputVO.setDataItemList(dataItemList);
+inputVO.setLogicRelation("||");
+inputVO.setChannelId(ChannelId);
+request.setBizContent(JSON.toJSONString(inputVO));
+encRequest.setAppId(appId);
+encRequest.setVersion(version);
+encRequest.setTimestamp(daytime);
+encRequest.setOutId(request.getOutId());
+String outid = request.getOutId();
+String reqIv = JkYunAesUtil.genIv();
+String reqSecretKey = JkYunAesUtil.genKey();
+String encReqIv = JkYunRsaUtil.encrypt(reqIv, servicePublicKey);
+String encReqSecretKey = JkYunRsaUtil.encrypt(reqSecretKey, servicePublicKey);
+encRequest.setReqIv(encReqIv);
+encRequest.setReqSecretKey(encReqSecretKey);
+String encBizContent = JkYunAesUtil.encryptByCBC(request.getBizContent(), reqSecretKey, reqIv);
+encRequest.setBizContent(encBizContent);
+String signStr = JkYunSignUtil.getSignStr(BeanUtil.beanToMap(encRequest));
+String sign = JkYunSignUtil.sign(signStr, ownPrivateKey);
+
+log.info(timestamp);
+vars.put("id",idNoMd5);
+vars.put("outId",outid);
+vars.put("timestamp",timestamp);
+vars.put("reqSecretKey",encReqSecretKey);
+vars.put("reqIv",encReqIv);
+vars.put("sign",sign);
+vars.put("bizContent",encBizContent);
+
+
+
